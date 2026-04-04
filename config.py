@@ -1,0 +1,56 @@
+# config.py
+
+import os
+import re
+from typing import Optional
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Базовая директория проекта
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Временная директория для хранения загруженных видео
+TEMP_DIRECTORY = os.path.join(BASE_DIR, "temp_videos")
+
+# Cookies file for platforms that require login (Instagram, TikTok)
+# Export from browser using "Get cookies.txt" extension
+COOKIES_FILE = os.path.join(BASE_DIR, "cookies.txt")
+COOKIES_ENABLED = os.path.exists(COOKIES_FILE)
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_MODE = os.getenv("BOT_MODE", "webhook").strip().lower()
+
+# Server configuration
+PORT = int(os.getenv("PORT", "8000"))  # Default port 8000 if not specified
+HOST = os.getenv("HOST", "0.0.0.0")   # Default host 0.0.0.0 if not specified
+
+WEBHOOK_PATH = os.getenv("WEBHOOK_PATH")
+WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+
+# MongoDB configuration
+MONGODB_URI = os.getenv("MONGODB_URI")
+MONGODB_DB_NAME = os.getenv("MONGODB_DB_NAME")
+MONGODB_USERS_COLLECTION = os.getenv("MONGODB_USERS_COLLECTION")
+
+# User management configuration
+ADMIN_IDS = list(map(int, filter(None, os.getenv("ADMIN_IDS", "").split(","))))
+
+
+# Dictionary for identifying platform based on URL - Top 10 most popular platforms
+PLATFORM_IDENTIFIERS = {
+    "instagram.com": "Instagram",
+}
+
+
+# URL validation
+URL_PATTERN = re.compile(r'https?://[^\s<>"{}|\\^`\[\]]+')
+
+
+def extract_url(text: str) -> Optional[str]:
+    """Extract the first URL from text."""
+    match = URL_PATTERN.search(text)
+    return match.group(0) if match else None
+    
+COOKIES_ENABLED = True
+COOKIES_FILE = 'cookies.txt'
