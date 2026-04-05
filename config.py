@@ -52,5 +52,5 @@ def extract_url(text: str) -> Optional[str]:
     match = URL_PATTERN.search(text)
     return match.group(0) if match else None
     
-COOKIES_ENABLED = True
-COOKIES_FILE = 'cookies.txt'
+COOKIES_FILE = os.path.join(BASE_DIR, 'cookies.txt')
+COOKIES_ENABLED = os.path.exists(COOKIES_FILE)
