@@ -54,3 +54,5 @@ def extract_url(text: str) -> Optional[str]:
     
 COOKIES_FILE = os.path.join(BASE_DIR, 'cookies.txt')
 COOKIES_ENABLED = os.path.exists(COOKIES_FILE)
+print(f"COOKIES_FILE: {COOKIES_FILE}")
+print(f"COOKIES_ENABLED: {COOKIES_ENABLED}")
