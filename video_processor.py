@@ -10,7 +10,6 @@ from aiogram.types import FSInputFile
 
 from config import TEMP_DIRECTORY
 from utils.common_utils import safe_edit_message
-from utils.cleanup import cleanup_temp_directory
 
 logger = logging.getLogger(__name__)
 
